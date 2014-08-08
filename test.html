@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v1.3.0.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.js">
+	var questions = [
+		{
+			id: 01,
+			text: 'Me gustan las revistas de mecánica.',
+			options: ['Verdadero', 'Falso']
+		},
+		{
+			id: 02,
+			text: 'Tengo buen apetito.',
+			options: ['Verdadero', 'Falso'] 
+		} 
+	],
+
+	questionTemp = '{{#each  questions}} 
+						<div>
+							<p id="question-{{id}}">{{text}}</p>
+							<input type="radio" name="{{id}}" value="true" />
+							<input type="radio" name="{{id}}" value="false" />
+						</div>
+					{{/each}}',
+
+	compQuestionTemp;
+
+	compQuestionTemp = Handlebars.compile(questionTemp);
+
+	console.log(compQuestionTemp.)
+
+</script>
+
+</head>
+
+
+
+<body>
+
+
+
+
