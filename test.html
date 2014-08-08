@@ -1,43 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v1.3.0.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.js">
-	var questions = [
-		{
-			id: 01,
-			text: 'Me gustan las revistas de mecánica.',
-			options: ['Verdadero', 'Falso']
-		},
-		{
-			id: 02,
-			text: 'Tengo buen apetito.',
-			options: ['Verdadero', 'Falso'] 
-		} 
-	],
-
-	questionTemp = '{{#each  questions}} 
-						<div>
-							<p id="question-{{id}}">{{text}}</p>
-							<input type="radio" name="{{id}}" value="true" />
-							<input type="radio" name="{{id}}" value="false" />
-						</div>
-					{{/each}}',
-
-	compQuestionTemp;
-
-	compQuestionTemp = Handlebars.compile(questionTemp);
-
-	console.log(compQuestionTemp);
-
-</script>
+	<script type="text/javascript" src="js/third/handlebars-v1.3.0.js"></script>
+	<script type="text/javascript" src="js/third/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/questions.js"></script>
+	<script id="question-temp" type="text/x-handlebars-template">
+		{{#each questions}} 
+			<div>
+				<p id="question-{{id}}">{{text}}</p>
+				<label>Verdadero <input type="radio" name="{{id}}" value="true" /></label>
+				<label>Falso <input type="radio" name="{{id}}" value="false" /></label>
+			</div>
+		{{/each}}
+	</script>
 
 </head>
 
-
-
 <body>
+	<div class="main">
+		
+	</div>
+</body>	
 
+<script type="text/javascript">
+
+	var tempSource = $('#question-temp').html(),
+		temp = Handlebars.compile(tempSource), // Handlebars.compile() method returns a template ready to be reused so we only do this once
+		html;
+
+	questionsHTML = temp(data); //returns an HTML string based on the context (the js object defined in questions.js)
+
+	$('.main').html(questionsHTML);
+
+</script>
+
+</html>
 
 
 
