@@ -18,13 +18,20 @@
 </head>
 
 <body>
-	<div class="main">
+	<div class="instructions">
+		<h1>CUESTIONARIO M M P I – 2*</h1>
+		<p>Este Cuestionario contiene una serie de frases. Lea cada una de ellas y decida si, aplicada a usted mismo, es verdadera o falsa; seleccione la opción deseada.</p>
+		<p>Si el contenido de una frase no tiene aplicación a su caso, o bien es algo de lo que usted no podría decir si es verdadero o falso, deje los dos espacios en blanco.</p>
+		<p>INTENTE RESPONDER TODAS LAS FRASES</p>
+		<button class="start">Comenzar</button>
+	</div> <!-- end instructions -->
+	<div class="main" style="display:none;">
 		
-	</div>
-	<div>
+	</div> <!-- end main -->
+	<div class="navigation" style="display:none;">
 		<button class="prev">prev</button>
 		<button class="next">next</button>
-	</div>
+	</div> <!-- end navigation -->
 </body>	
 
 <script type="text/javascript">
@@ -53,7 +60,11 @@
 
 			
 			$(function (){
-				createContent(0);
+				$('.start').click(function() {
+					createContent(0);
+					$('.instructions').hide('fast');
+					$('.main, .navigation').show('slow');
+				});
 				$('.prev').click(function() {
 					createContent(-10);
 				});
