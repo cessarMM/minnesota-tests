@@ -32,9 +32,9 @@
 	var tempSource = $('#question-temp').html(),
 		temp = Handlebars.compile(tempSource), // Handlebars.compile() method returns a template ready to be reused so we only do this once
 		// borre la variable html
-		controlArrayFrom = 0, // Variable de control de inicio
-		controlArrayTo = 10, // Variable de control final
-		tempArray; // Extraccion de un trozo del array sin modificar el inicial
+		controlArrayFrom = 0, // Variable de control de inicio (con valor inicial)
+		controlArrayTo = 10, // Variable de control final (con valor final)
+		tempArray; // Array temporal que contendra parte del array principal
 
 		
 
@@ -59,7 +59,7 @@
 				});
 				$('.next').click(function() {
 					createContent(+10);
-				});
+				}); // checar el uso de un bucle for
 			});
 </script>
 
