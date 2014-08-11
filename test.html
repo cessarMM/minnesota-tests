@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8" />
 	<script type="text/javascript" src="js/third/handlebars-v1.3.0.js"></script>
 	<script type="text/javascript" src="js/third/jquery-2.1.1.js"></script>
 	<script type="text/javascript" src="js/questions.js"></script>
 	<script id="question-temp" type="text/x-handlebars-template">
-		{{#each questions}} 
+		{{#each this}} 
 			<div>
-				<p id="question-{{id}}">{{text}}</p>
+				<p id="question-{{id}}">{{id}}. {{text}}</p>
 				<label>Verdadero <input type="radio" name="{{id}}" value="true" /></label>
 				<label>Falso <input type="radio" name="{{id}}" value="false" /></label>
 			</div>
 		{{/each}}
-	</script>
+	</script> <!-- data por this para acceder al array -->
 
 </head>
 
@@ -20,18 +21,46 @@
 	<div class="main">
 		
 	</div>
+	<div>
+		<button class="prev">prev</button>
+		<button class="next">next</button>
+	</div>
 </body>	
 
 <script type="text/javascript">
 
 	var tempSource = $('#question-temp').html(),
 		temp = Handlebars.compile(tempSource), // Handlebars.compile() method returns a template ready to be reused so we only do this once
-		html;
+		// borre la variable html
+		controlArrayFrom = 0, // Variable de control de inicio
+		controlArrayTo = 10, // Variable de control final
+		tempArray; // Extraccion de un trozo del array sin modificar el inicial
 
-	questionsHTML = temp(data); //returns an HTML string based on the context (the js object defined in questions.js)
+		
 
-	$('.main').html(questionsHTML);
 
+	//questionsHTML = temp(tempArray); //returns an HTML string based on the context (the js object defined in questions.js)
+
+	//('.main').html(questionsHTML);
+
+	function createContent (numberControl) { 
+		controlArrayFrom = controlArrayFrom + numberControl;
+		controlArrayTo =  controlArrayTo + numberControl;
+		tempArray = data.slice(controlArrayFrom, controlArrayTo)
+		questionsHTML = temp(tempArray);
+		$('.main').html(questionsHTML);			
+	} // Funcion que imprime la información
+
+			
+			$(function (){
+				createContent(0);
+				$('.prev').click(function() {
+					createContent(-10);
+				});
+				$('.next').click(function() {
+					createContent(+10);
+				});
+			});
 </script>
 
 </html>
